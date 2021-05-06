@@ -18,7 +18,7 @@ public class AddressBook {
     }
 
     /* @Description - Add new contacts to the address book  */
-    public boolean addContact(Contact contact){
+    public List<Contact> addContact(Contact contact){
         System.out.println(contact);
         List<Contact> contactList = new ArrayList<>();
         try {
@@ -72,7 +72,28 @@ public class AddressBook {
         }
         return null;
     }
-}
+
+        /* @Description - To use the delete  contact person using their name.
+         * @Return- contact list */
+        public List<Contact> deleteContact(List<Contact> contactList, String name) {
+            try {
+                for (Contact contact : contactList) {
+                    if (contact.firstName.equals(name)) {
+                        contactList.remove(contactList.indexOf(contact));
+                        System.out.println("Contact deleted with name : " +name);
+                        break;
+                    }
+                }
+                return contactList;
+            } catch (Exception e) {
+                System.out.println("Name not found :" + e);
+                e.printStackTrace();
+            }
+            return contactList;
+        }
+    }
+
+
 
 
 
