@@ -1,9 +1,15 @@
 package com.addressbook;
 
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class AddressBookTest {
+
+    @Before
+    public void initialize() {
+        AddressBook addressBook;
+    }
 
     @Test
     public void givenContact_WhenAddedToAddressBook_ShouldReturnTrue(){
