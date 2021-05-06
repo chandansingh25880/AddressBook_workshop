@@ -6,6 +6,8 @@ import java.util.List;
 /* @Description - To create a contacts in address book with first name, last name, address, city, state,
  * zip,mobile number.*/
 public class AddressBook {
+    public List<Contact> contactList;
+
     public static void main(String[] args) {
         System.out.println("Welcome to address book system program");
         Contact contact = new Contact("chandan", "singh", "millingTonia",
@@ -28,6 +30,49 @@ public class AddressBook {
         }
         return false;
     }
+
+    /* @Description - To use the edit contact person using their name.*/
+
+    public Contact editContact(List<Contact> contactList, String name, String fieldName, String edit) {
+        try {
+            for(Contact contact : contactList){
+                if(contact.firstName.equals(name)) {
+                    switch (fieldName) {
+                        case "firstName":
+                            contact.firstName = edit;
+                            break;
+                        case "lastName":
+                            contact.lastName = edit;
+                            break;
+                        case "address":
+                            contact.address = edit;
+                            break;
+                        case "city":
+                            contact.city = edit;
+                            break;
+                        case "state":
+                            contact.state = edit;
+                            break;
+                        case "zip":
+                            contact.zip = Integer.parseInt(edit);
+                            break;
+                        case "phone":
+                            contact.phoneNumber = Long.parseLong(edit);
+                            break;
+                        case "email":
+                            contact.emailId = edit;
+                            break;
+                    }
+                }
+                return contact;
+            }
+        } catch (Exception e) {
+            System.out.println("Details not matching " + e);
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
+
 
 
