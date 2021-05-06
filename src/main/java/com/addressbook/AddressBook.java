@@ -1,12 +1,15 @@
 package com.addressbook;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /* @Description - To create a contacts in address book with first name, last name, address, city, state,
  * zip,mobile number.*/
 public class AddressBook {
-    public List<Contact> contactList;
+    public static List<Contact> contactList = new ArrayList<>();
+    public static HashMap<String, List<Contact>> addressBookMap = new HashMap<>();
+
 
     public static void main(String[] args) {
         System.out.println("Welcome to address book system program");
@@ -18,94 +21,106 @@ public class AddressBook {
     }
 
     /* @Description - Add new contacts to the address book  */
-    public List<Contact> addContact(Contact contact){
-        System.out.println(contact);
-        List<Contact> contactList = new ArrayList<>();
+    public HashMap<String, List<Contact>> addContact(String addressBookName, Contact contact) {
         try {
-            contactList.add(contact);
-            System.out.println(contactList);
-            return true;
+            if (!addressBookMap.containsKey(addressBookName)) createNewAddAddressBook(addressBookName);
+            addressBookMap.get(addressBookName).add(contact);
+            System.out.println("Contact Added Successfully.");
         } catch (Exception e) {
+            System.out.println("Contact not added " + e);
             e.printStackTrace();
         }
-        return false;
+        return addressBookMap;
     }
+
+    private void createNewAddAddressBook(String addressBookName) {
+    }
+
 
     /* @Description - To use the edit contact person using their name.*/
 
-    public Contact editContact(List<Contact> contactList, String name, String fieldName, String edit) {
+    public Object editContact(HashMap<String, List<Contact>> addressBookList, String addressBookName, String name, String fieldName, String update) {
         try {
-            for(Contact contact : contactList){
-                if(contact.firstName.equals(name)) {
-                    switch (fieldName) {
-                        case "firstName":
-                            contact.firstName = edit;
-                            break;
-                        case "lastName":
-                            contact.lastName = edit;
-                            break;
-                        case "address":
-                            contact.address = edit;
-                            break;
-                        case "city":
-                            contact.city = edit;
-                            break;
-                        case "state":
-                            contact.state = edit;
-                            break;
-                        case "zip":
-                            contact.zip = Integer.parseInt(edit);
-                            break;
-                        case "phone":
-                            contact.phoneNumber = Long.parseLong(edit);
-                            break;
-                        case "email":
-                            contact.emailId = edit;
-                            break;
+            if (addressBookList.containsKey(addressBookName)) {
+                List<Contact> contactList = addressBookList.get(addressBookName);
+                for (Contact contact : contactList) {
+                    if (contact.firstName.equals(name)) {
+                        switch (fieldName) {
+                            case "firstName":
+                                contact.firstName = update;
+                                break;
+                            case "lastName":
+                                contact.lastName = update;
+                                break;
+                            case "address":
+                                contact.address = update;
+                                break;
+                            case "city":
+                                contact.city = update;
+                                break;
+                            case "state":
+                                contact.state = update;
+                                break;
+                            case "zip":
+                                contact.zip = Integer.parseInt(update);
+                                break;
+                            case "phone":
+                                contact.phoneNumber = Long.parseLong(update);
+                                break;
+                            case "email":
+                                contact.emailId = update;
+                                break;
+                        }
+                        System.out.println("Contact updated with name : " + name);
                     }
+                    return true;
                 }
-                return contact;
             }
         } catch (Exception e) {
             System.out.println("Details not matching " + e);
             e.printStackTrace();
         }
-        return null;
+        return false;
     }
 
-        /* @Description - To use the delete  contact person using their name.
-         * @Return- contact list */
-        public List<Contact> deleteContact(List<Contact> contactList, String name) {
-            try {
+
+    public boolean deleteContact(HashMap<String, List<Contact>> addressBookList, String addressBookName, String name) {
+        try {
+            if (addressBookList.containsKey(addressBookName)) {
+                List<Contact> contactList = addressBookList.get(addressBookName);
                 for (Contact contact : contactList) {
                     if (contact.firstName.equals(name)) {
                         contactList.remove(contactList.indexOf(contact));
-                        System.out.println("Contact deleted with name : " +name);
+                        System.out.println("Contact deleted with name : " + name);
                         break;
                     }
                 }
-                return contactList;
-            } catch (Exception e) {
-                System.out.println("Name not found :" + e);
-                e.printStackTrace();
             }
-            return contactList;
+            return true;
+        } catch (Exception e) {
+            System.out.println("Name not found :" + e);
+            e.printStackTrace();
         }
+        return false;
+    }
 
     /* @Description - Add multiple contact in address book .
      * @Return- contact list */
     public List<Contact> addMultipleContactList(List<Contact> contactDataList) {
-        try {
-            for (Contact contact : contactDataList) {
-                addContact(contact);
+        public List<Contact> addMultipleContactList(List <Contact> contactDataList){
+            try {
+                for (Contact contact : contactDataList) {
+                    addContact(contact);
+                }
+                return contactList;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
             return contactList;
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return contactList;
     }
 }
+
 
 
 
