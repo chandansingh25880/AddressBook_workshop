@@ -101,6 +101,39 @@ public class AddressBookTest {
         Assertions.assertNotEquals(3, contactList.get("Family").size());
 
     }
+
+    @Test
+    public void givenListOfContacts_whenSearchByCity_ShouldReturnTrue() {
+        AddressBook addressBook = new AddressBook();
+        List<Contact> contactDataList = new ArrayList<>();
+        contactDataList.add(new Contact("chandan", "singh", "millingonia", "lko",
+                "Up", 226001, 8887719063l, "chandan.1sep@gmail.com"));
+        contactDataList.add(new Contact("siddhant", "singh", "golfcity", "lko",
+                "Up", 226001, 9654981412l, "sid888gmail.com"));
+        contactDataList.add(new Contact("Laxman", "singh", "V.D marg", "Lko",
+                "Up", 226001, 9658981413l, "laxman@gmail.com"));
+        HashMap<String, List<Contact>> contactList = addressBook.addContactList("Family", contactDataList);
+        Assertions.assertNotEquals(3, contactList.get("Family").size());
+    }
+    @Test
+    public void givenListOfContacts_whenSearchByCity_ShouldReturnTrue() {
+        AddressBook addressBook = new AddressBook();
+        List<Contact> contactDataList = new ArrayList<>();
+        contactDataList.searchPersonByCity(new Contact("chandan", "Singh", "millingtonia", "lko",
+                "Up", 223223, 9654981413l, "chadan.1sep@gmail.com"));
+        HashMap<String, List<Contact>> contactList = addressBook.addContactList("Family", contactDataList);
+        Assertions.assertEquals(1, contactList.get("Family").size());
+    }
+    @Test
+    public void givenListOfContacts_whenSearchByState_ShouldReturnTrue() {
+        AddressBook addressBook = new AddressBook();
+        List<Contact> contactDataList = new ArrayList<>();
+        contactDataList.searchPersonByState(new Contact("Laxman", "Singh", "V.d marg", "lko",
+                "Up", 223223, 9654981413l, "Laxman@gmail.com"));
+        HashMap<String, List<Contact>> contactList = addressBook.addContactList("Family", contactDataList);
+        Assertions.assertEquals(1, contactList.get("Family").size());
+    }
+
 }
 
 
