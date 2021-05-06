@@ -91,7 +91,21 @@ public class AddressBook {
             }
             return contactList;
         }
+
+    /* @Description - Add multiple contact in address book .
+     * @Return- contact list */
+    public List<Contact> addMultipleContactList(List<Contact> contactDataList) {
+        try {
+            for (Contact contact : contactDataList) {
+                addContact(contact);
+            }
+            return contactList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return contactList;
     }
+}
 
 
 
