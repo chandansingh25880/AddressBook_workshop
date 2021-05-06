@@ -104,7 +104,7 @@ public class AddressBook {
     /* @Description - Add multiple contact in address book .
      * @Return- contact list */
     public List<Contact> addMultipleContactList(List<Contact> contactDataList) {
-        public List<Contact> addMultipleContactList(List <Contact> contactDataList){
+        public List<Contact> addMultipleContactList (List < Contact > contactDataList) {
             try {
                 for (Contact contact : contactDataList) {
                     addContact(contact);
@@ -115,7 +115,23 @@ public class AddressBook {
             }
             return contactList;
         }
+        /* @Description - Add multiple contact in address book to the system
+         *  each address book has a unique name.
+         * @Return- addressbookmap */
+
+        public HashMap<String, List<Contact>> createNewAddAddressBook (String addressBookName){
+            try {
+                addressBookMap.put(addressBookName, new ArrayList<Contact>());
+                System.out.println("New Address Book Created with Name : " + addressBookName);
+            } catch (Exception e) {
+                System.out.println("Invalid name" + e);
+                e.printStackTrace();
+            }
+            return addressBookMap;
+        }
     }
+}
+
 
    
 
