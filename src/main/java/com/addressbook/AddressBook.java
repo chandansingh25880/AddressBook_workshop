@@ -1,6 +1,12 @@
 package com.addressbook;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.IntStream;
+
 
 /* @Description - To create a contacts in address book with first name, last name, address, city, state,
  * zip,mobile number.*/
@@ -9,14 +15,40 @@ public class AddressBook {
     public static HashMap<String, List<Contact>> addressBookMap = new HashMap<>();
     private HashMap<Object, Object> contact;
 
+    /* @Description - to write the employee contacts details */
+
+    private static void writeEmployeeContactsData(Scanner consoleInputReader) {
+        System.out.println("Enter your first name");
+        String firstName = consoleInputReader.nextLine();
+        System.out.println("Enter your last name");
+        String lastName = consoleInputReader.nextLine();
+        System.out.println("Enter your address name");
+        String address = consoleInputReader.nextLine();
+        System.out.println("Enter your city name");
+        String city = consoleInputReader.nextLine();
+        System.out.println("Enter your state name");
+        String state = consoleInputReader.nextLine();
+        System.out.println("Enter your zip  code ");
+        int  zip = consoleInputReader.nextInt();
+        System.out.println("Enter your zip  code ");
+        long  phoneNumber = consoleInputReader.nextLong();
+        System.out.println("Enter your email Id");
+        String emailId = consoleInputReader.nextLine();
+
+    }
+
+    /* @Description - to read  the employee contacts details */
+    private static void readEmployeeContactsData() {
+        System.out.println("Write employee contacts details " + employeeContactsList);
+    }
+
+
 
     public static void main(String[] args) {
         System.out.println("Welcome to address book system program");
-        Contact contact = new Contact("chandan", "singh", "millingTonia",
-                "Lko", "up", 226001,
-                9180256231L, "chandan.1sep@gmail.com");
-        System.out.println(contact.toString());
-        System.out.println("Welcome to the addressbook prog");
+        Scanner consoleInputReader = new Scanner(System.in);
+        AddressBook.writeEmployeeContactsData(consoleInputReader);
+        AddressBook.readEmployeeContactsData();
     }
 
     /* @Description - Add new contacts to the address book  */
@@ -161,7 +193,7 @@ public class AddressBook {
             System.out.println(i.nextElement());
         }
     }
-}
+
 
 
 
