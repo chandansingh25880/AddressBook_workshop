@@ -1,14 +1,13 @@
 package com.addressbook;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /* @Description - To create a contacts in address book with first name, last name, address, city, state,
  * zip,mobile number.*/
 public class AddressBook {
     public static List<Contact> contactList = new ArrayList<>();
     public static HashMap<String, List<Contact>> addressBookMap = new HashMap<>();
+    private HashMap<Object, Object> contact;
 
 
     public static void main(String[] args) {
@@ -32,6 +31,7 @@ public class AddressBook {
         }
         return addressBookMap;
     }
+
 
 
     /* @Description - To use the edit contact person using their name.*/
@@ -130,7 +130,39 @@ public class AddressBook {
             return addressBookMap;
         }
     }
+
+    /* Description - to view person by city  */
+    public void viewPersonByCity() {
+        System.out.println("Enter the city to search person.");
+        String cityName = sc.next();
+        System.out.println("Person Search by " + cityName);
+        Collection<Contact> values = contact.values();
+        ArrayList<Contact> conatactlist
+                = new ArrayList<>(values);
+        Dictionary dictWithCity = new Hashtable();
+        conatactlist.stream().filter(n -> n.city.contains(cityName)).forEach(contactlist -> dictWithCity.put(contactlist.firstName, cityName));
+        for (Enumeration i = dictWithCity.keys(); i.hasMoreElements(); ) {
+            System.out.println(i.nextElement());
+        }
+    }
+
+    /* Description - to view person by state  */
+
+    public void viewPersonByState() {
+        System.out.println("Enter the state to search person.");
+        String stateName = sc.next();
+        System.out.println("Person Search by " + stateName);
+        Collection<Contact> values = contact.values();
+        ArrayList<Contact> conatactlist
+                = new ArrayList<>(values);
+        Dictionary dictWithState = new Hashtable();
+        conatactlist.stream().filter(n -> n.state.contains(stateName)).forEach(contactlist -> dictWithState.put(contactlist.firstName, stateName));
+        for (Enumeration i = dictWithState.keys(); i.hasMoreElements(); ) {
+            System.out.println(i.nextElement());
+        }
+    }
 }
+
 
 
    
