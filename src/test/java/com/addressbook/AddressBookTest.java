@@ -165,7 +165,14 @@ public class AddressBookTest {
         Files.newDirectoryStream(path, path1 -> path.toFile().isFile() && path.toString().startsWith("temp")).forEach(System.out::println);
     }
 
+    @Test
+    public void givenThreeContactsInDB_WhenRetrieved_ShouldMatchEmployeeCount() {
+        AddressBookList addressBookList = new AddressBookList();
+        addressBookContactList = addressBookList.readAddressBookData(AddressBookList.IOService.DB_IO);
+        Assertions.assertEquals(3, addressBookContactList.size());
+    }
 }
+
 
 
 
